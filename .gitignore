@@ -15,3 +15,8 @@ buildNumber.properties
 .project
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
+.idea/misc.xml
+.idea/aws.xml
+.idea/desafiocartas.iml
+.idea/modules.xml
+.idea/vcs.xml
