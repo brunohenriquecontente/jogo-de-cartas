@@ -20,8 +20,6 @@ public class PlayerController {
     @Autowired
     private PlayerService playerService;
 
-    @Autowired
-    private DeckService deckService;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<PlayerDTO> create(@RequestBody PlayerDTO player){
@@ -29,12 +27,12 @@ public class PlayerController {
         return ResponseEntity.status(HttpStatus.CREATED).body(player);
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "draw_cards", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<PlayerDTO> drawCards(@RequestBody PlayerDTO player){
         player = playerService.drawCards(player);
-        return ResponseEntity.status(HttpStatus.CREATED).body(player);
+        return ResponseEntity.status(HttpStatus.OK).body(player);
     }
 
-    
+
 
 }
