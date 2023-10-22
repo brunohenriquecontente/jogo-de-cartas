@@ -10,11 +10,11 @@ import java.io.Serial;
 @Entity
 @Getter
 @Setter
-@Table(name="Deck")
+@Table(name="deck")
 public class DeckEntity extends AbstractBaseEntity  {
 
     @Serial
     private static final long serialVersionUID = 1709184783624324800L;
 
-    String deckId;
+    String deck_id;
 }
