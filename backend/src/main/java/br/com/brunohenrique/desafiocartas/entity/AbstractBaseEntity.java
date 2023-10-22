@@ -16,10 +16,20 @@ import java.util.UUID;
 public class AbstractBaseEntity implements Serializable {
 
 	@Serial
-	private static final long serialVersionUID = 5471728425287213854L;
+	private static final long serialVersionUID = -6556453805270108437L;
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
 
 }

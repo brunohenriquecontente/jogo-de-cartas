@@ -1,4 +1,6 @@
 package br.com.brunohenrique.desafiocartas.dto;
 
-public record PlayerDTO(long id, String name) {
+import lombok.Setter;
+
+public record PlayerDTO(Long id, String name) {
 }

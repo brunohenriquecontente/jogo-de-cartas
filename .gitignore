@@ -20,3 +20,4 @@ buildNumber.properties
 .idea/desafiocartas.iml
 .idea/modules.xml
 .idea/vcs.xml
+*.log

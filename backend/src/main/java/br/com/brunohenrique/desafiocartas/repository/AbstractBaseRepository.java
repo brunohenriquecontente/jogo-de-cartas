@@ -1,4 +1,5 @@
 package br.com.brunohenrique.desafiocartas.repository;
+
 import br.com.brunohenrique.desafiocartas.entity.AbstractBaseEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;

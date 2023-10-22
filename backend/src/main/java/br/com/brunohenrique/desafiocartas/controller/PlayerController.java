@@ -1,10 +1,40 @@
 package br.com.brunohenrique.desafiocartas.controller;
 
-import org.springframework.stereotype.Controller;
+import br.com.brunohenrique.desafiocartas.dto.DeckDTO;
+import br.com.brunohenrique.desafiocartas.dto.PlayerDTO;
+import br.com.brunohenrique.desafiocartas.service.DeckService;
+import br.com.brunohenrique.desafiocartas.service.PlayerService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
+@RequestMapping(value = "player")
 public class PlayerController {
 
+    @Autowired
+    private PlayerService playerService;
 
+    @Autowired
+    private DeckService deckService;
+
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<PlayerDTO> create(@RequestBody PlayerDTO player){
+        player = playerService.insert(player);
+        return ResponseEntity.status(HttpStatus.CREATED).body(player);
+    }
+
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<PlayerDTO> drawCards(@RequestBody PlayerDTO player){
+        player = playerService.drawCards(player);
+        return ResponseEntity.status(HttpStatus.CREATED).body(player);
+    }
+
+    
 
 }
