@@ -12,7 +12,7 @@ import java.util.List;
 @FeignClient(url="${deck.card.api.url}", name="deck-api")
 public interface ClientFeignDeck {
 
-    @PostMapping("new/shuffle/?deck_count=1")
+    @GetMapping("new/shuffle/?deck_count=1")
     DeckDTO getNewDeck();
 
   /*  @GetMapping("{deckId}/shuffle/")
