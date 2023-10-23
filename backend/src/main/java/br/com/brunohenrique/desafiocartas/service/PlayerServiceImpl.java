@@ -1,23 +1,14 @@
 package br.com.brunohenrique.desafiocartas.service;
 
-import br.com.brunohenrique.desafiocartas.dto.CardDTO;
-import br.com.brunohenrique.desafiocartas.dto.DrawResponseDTO;
 import br.com.brunohenrique.desafiocartas.dto.PlayerDTO;
-import br.com.brunohenrique.desafiocartas.entity.CardEntity;
 import br.com.brunohenrique.desafiocartas.entity.PlayerEntity;
 import br.com.brunohenrique.desafiocartas.repository.AbstractBaseRepositoryImpl;
 import br.com.brunohenrique.desafiocartas.repository.CardRepository;
 import br.com.brunohenrique.desafiocartas.repository.PlayerRepository;
-
 import jakarta.transaction.Transactional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
