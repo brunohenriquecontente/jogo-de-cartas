@@ -28,13 +28,25 @@ public class PlayerEntity extends AbstractBaseEntity {
     private MatchEntity match;
 
     public PlayerDTO toDTO() {
-        return new PlayerDTO(
-                this.getId(),
-                this.getName(),
-                this.getCards().stream()
-                        .map(CardEntity::toDTO)
-                        .collect(Collectors.toList()),
-                this.getMatch().toDTO()
-        );
+        if(this.getMatch() == null){
+            return new PlayerDTO(
+                    this.getId(),
+                    this.getName(),
+                    this.getCards().stream()
+                            .map(CardEntity::toDTO)
+                            .collect(Collectors.toList()),
+                    null
+            );
+        }else{
+            return new PlayerDTO(
+                    this.getId(),
+                    this.getName(),
+                    this.getCards().stream()
+                            .map(CardEntity::toDTO)
+                            .collect(Collectors.toList()),
+                    this.match.toDTO()
+            );
+        }
+
     }
 }

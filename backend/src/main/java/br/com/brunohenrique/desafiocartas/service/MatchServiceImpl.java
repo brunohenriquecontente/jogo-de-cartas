@@ -56,7 +56,7 @@ public class MatchServiceImpl extends AbstractBaseRepositoryImpl<MatchEntity, Lo
                 .map(playerDTO -> {
                     PlayerEntity playerEntity = playerRepository.findById(playerDTO.id()).get();
 
-                    //remove cartas do jogador
+                    //remove cartas do jogador, caso ele tenha jogado uma partida anteriormente
                     cardRepository.deleteAllByPlayerId(playerEntity.getId());
 
                     playerEntity.setMatch(finalMatchEntity);
