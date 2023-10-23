@@ -16,5 +16,5 @@ public class DeckEntity extends AbstractBaseEntity  {
     @Serial
     private static final long serialVersionUID = 1709184783624324800L;
 
-    String deck_id;
+    String deckId;
 }

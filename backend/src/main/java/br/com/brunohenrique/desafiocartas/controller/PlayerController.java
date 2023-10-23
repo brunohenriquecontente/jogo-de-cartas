@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "player")
@@ -20,16 +17,14 @@ public class PlayerController {
     @Autowired
     private PlayerService playerService;
 
-
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<PlayerDTO> create(@RequestBody PlayerDTO player){
         player = playerService.insert(player);
         return ResponseEntity.status(HttpStatus.CREATED).body(player);
     }
-
-    @PostMapping(path = "draw_cards", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<PlayerDTO> drawCards(@RequestBody PlayerDTO player){
-        player = playerService.drawCards(player);
+    @GetMapping(path = "draw_cards/{player_id}/{deck_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<PlayerDTO> drawCards(@PathVariable Long playerId, @PathVariable String deckId){
+        PlayerDTO player = playerService.drawCards(playerId, deckId);
         return ResponseEntity.status(HttpStatus.OK).body(player);
     }
 

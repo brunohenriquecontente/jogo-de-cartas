@@ -1,13 +1,13 @@
 package br.com.brunohenrique.desafiocartas.service;
 
 import br.com.brunohenrique.desafiocartas.dto.DeckDTO;
-import br.com.brunohenrique.desafiocartas.entity.CardEntity;
+import br.com.brunohenrique.desafiocartas.dto.DrawResponseDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
+import java.util.Objects;
 
 @FeignClient(url="${deck.card.api.url}", name="deck-api")
 public interface ClientFeignDeck {
@@ -15,9 +15,6 @@ public interface ClientFeignDeck {
     @GetMapping("new/shuffle/?deck_count=1")
     DeckDTO getNewDeck();
 
-  /*  @GetMapping("{deckId}/shuffle/")
-    void reshuffleCards(@PathVariable String deckId);
-
     @GetMapping("{deck_id}/draw/?count={count}")
-    List<CardEntity> drawCards(@PathVariable String deckId, Integer count);*/
+    DrawResponseDTO getCards(@PathVariable String deck_id, @PathVariable Integer count);
 }

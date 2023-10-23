@@ -5,12 +5,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "Card")
+@Table(name = "card")
 @Getter
 @Setter
 public class CardEntity extends AbstractBaseEntity{
 
-    private String rank;
+    private Integer rank;
+
+    private String code;
 
     private String suit;
 

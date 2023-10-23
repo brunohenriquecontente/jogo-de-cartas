@@ -1,5 +1,8 @@
 package br.com.brunohenrique.desafiocartas.dto;
 
-public record CardDTO(Integer value, String suits
-){
-}
+public record CardDTO(
+        String code,
+        String value,
+        String suit
+) {}
+
