@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>br.com.brunohenrique</groupId>
 	<artifactId>desafio-cartas</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>desafio-cartas</name>
 	<description>Desafio Cartas Koerich Lab</description>
 	<properties>
