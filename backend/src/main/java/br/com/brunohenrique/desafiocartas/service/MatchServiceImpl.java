@@ -42,7 +42,7 @@ public class MatchServiceImpl extends AbstractBaseRepositoryImpl<MatchEntity, Lo
 
 
     @Override
-    public void insert(List<PlayerDTO> players) {
+    public MatchDTO insert(List<PlayerDTO> players) {
         MatchEntity matchEntity = new MatchEntity();
         DeckEntity deckEntity = new DeckEntity();
         //Obter baralho
@@ -87,12 +87,42 @@ public class MatchServiceImpl extends AbstractBaseRepositoryImpl<MatchEntity, Lo
                     return playerEntity;
                 })
             .toList();
+
+        return new MatchDTO(matchEntity.getId(),matchEntity.getWinner(),deckDTO, null);
     }
 
     @Override
-    public MatchDTO getWinner(String matchId) {
+    public MatchDTO getWinner(Long matchId) {
+       List<PlayerEntity> playerEntityList = playerRepository.findAllByMatchId(matchId);
+        StringBuilder winnerName = new StringBuilder();
+        int maxSum = Integer.MIN_VALUE;
+        boolean isTie = false;
 
+        for (PlayerEntity player : playerEntityList) {
+            int sum = player.getCards().stream()
+                    .mapToInt(CardEntity::getRank)
+                    .sum();
 
-        return null;
+            if (sum > maxSum) {
+                maxSum = sum;
+                winnerName = new StringBuilder(player.getName());
+                isTie = false;
+            } else if (sum == maxSum) {
+                if (!isTie) {
+                    winnerName.append(", ").append(player.getName());
+                    isTie = true;
+                } else {
+                    winnerName.append(", ").append(player.getName());
+                }
+            }
+        }
+        MatchEntity matchEntity = matchRepository.findById(matchId).get();
+        matchEntity.setWinner(winnerName.toString());
+        matchRepository.save(matchEntity);
+        DeckDTO deckDTO = new DeckDTO(matchEntity.getDeck().getDeckId());
+
+        MatchDTO matchDTO = new MatchDTO(matchEntity.getId(),matchEntity.getWinner(),deckDTO, null );
+
+        return matchDTO;
     }
 }

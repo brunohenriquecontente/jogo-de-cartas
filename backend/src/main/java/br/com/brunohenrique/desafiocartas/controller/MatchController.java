@@ -20,13 +20,13 @@ public class MatchController {
     private MatchService matchService;
 
     @GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> insert(@RequestBody List<PlayerDTO> players){
-        matchService.insert(players);
-        return ResponseEntity.status(HttpStatus.OK).build();
+    public ResponseEntity<MatchDTO> insert(@RequestBody List<PlayerDTO> players){
+        MatchDTO matchDTO = matchService.insert(players);
+        return ResponseEntity.status(HttpStatus.OK).body(matchDTO);
    }
 
-    @GetMapping(  produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<MatchDTO> getWinner(@PathVariable String matchId){
+    @GetMapping(value = "{matchId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<MatchDTO> getWinner(@PathVariable Long matchId){
         MatchDTO matchDTO = matchService.getWinner(matchId);
         return ResponseEntity.status(HttpStatus.OK).body(matchDTO);
     }

@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.List;
 
 public interface MatchService extends AbstractBaseService<MatchEntity, Long> {
-    public void insert(List<PlayerDTO> players);
+    public MatchDTO insert(List<PlayerDTO> players);
 
-    public MatchDTO getWinner(String matchId);
+    public MatchDTO getWinner(Long matchId);
 
 }
