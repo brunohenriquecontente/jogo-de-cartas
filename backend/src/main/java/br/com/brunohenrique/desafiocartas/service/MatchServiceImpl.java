@@ -55,6 +55,10 @@ public class MatchServiceImpl extends AbstractBaseRepositoryImpl<MatchEntity, Lo
         List<PlayerEntity> playerEntitiesList = players.stream()
                 .map(playerDTO -> {
                     PlayerEntity playerEntity = playerRepository.findById(playerDTO.id()).get();
+
+                    //remove cartas do jogador
+                    cardRepository.deleteAllByPlayerId(playerEntity.getId());
+
                     playerEntity.setMatch(finalMatchEntity);
                     DrawResponseDTO cards = clientFeignDeck.getCards(deckDTO.deckId(), 5);
                     List<CardDTO> listCardDTO = cards.cards();
