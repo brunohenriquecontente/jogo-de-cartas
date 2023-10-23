@@ -1,5 +1,7 @@
 package br.com.brunohenrique.desafiocartas.entity;
 
+import br.com.brunohenrique.desafiocartas.dto.MatchDTO;
+import br.com.brunohenrique.desafiocartas.dto.PlayerDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -9,6 +11,7 @@ import lombok.Setter;
 
 import java.io.Serial;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -26,4 +29,18 @@ public class MatchEntity extends AbstractBaseEntity  {
 
     @OneToMany(mappedBy = "match")
     private List<PlayerEntity> players;
+
+
+    public MatchDTO toDTO() {
+        List<PlayerDTO> playerDTOs = this.getPlayers().stream()
+                .map(PlayerEntity::toDTO)
+                .toList();
+
+                return new MatchDTO(
+                        this.getId(),
+                        this.getWinner(),
+                        this.getDeck().toDTO(),
+                        playerDTOs
+        );
+    }
 }

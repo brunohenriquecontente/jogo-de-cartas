@@ -1,11 +1,13 @@
 package br.com.brunohenrique.desafiocartas.entity;
 
+import br.com.brunohenrique.desafiocartas.dto.PlayerDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serial;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "player")
@@ -24,4 +26,15 @@ public class PlayerEntity extends AbstractBaseEntity {
 
     @ManyToOne
     private MatchEntity match;
+
+    public PlayerDTO toDTO() {
+        return new PlayerDTO(
+                this.getId(),
+                this.getName(),
+                this.getCards().stream()
+                        .map(CardEntity::toDTO)
+                        .collect(Collectors.toList()),
+                this.getMatch().toDTO()
+        );
+    }
 }

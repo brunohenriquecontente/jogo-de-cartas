@@ -1,5 +1,6 @@
 package br.com.brunohenrique.desafiocartas.entity;
 
+import br.com.brunohenrique.desafiocartas.dto.DeckDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -21,4 +22,10 @@ public class DeckEntity extends AbstractBaseEntity  {
 
     @OneToOne(mappedBy = "deck")
     private MatchEntity match;
+
+    public DeckDTO toDTO() {
+        return new DeckDTO(
+                this.getDeckId()
+        );
+    }
 }
