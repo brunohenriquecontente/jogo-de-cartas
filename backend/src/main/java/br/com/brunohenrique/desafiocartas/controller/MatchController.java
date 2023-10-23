@@ -19,7 +19,7 @@ public class MatchController {
     @Autowired
     private MatchService matchService;
 
-    @GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<MatchDTO> insert(@RequestBody List<PlayerDTO> players){
         MatchDTO matchDTO = matchService.insert(players);
         return ResponseEntity.status(HttpStatus.OK).body(matchDTO);
