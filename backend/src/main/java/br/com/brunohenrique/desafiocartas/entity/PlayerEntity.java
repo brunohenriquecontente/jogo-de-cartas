@@ -2,7 +2,6 @@ package br.com.brunohenrique.desafiocartas.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.Setter;
 
 import java.io.Serial;
@@ -22,4 +21,7 @@ public class PlayerEntity extends AbstractBaseEntity {
 
     @OneToMany(mappedBy = "player")
     private List<CardEntity> cards;
+
+    @ManyToOne
+    private MatchEntity match;
 }

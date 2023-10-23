@@ -22,12 +22,6 @@ public class PlayerController {
         player = playerService.insert(player);
         return ResponseEntity.status(HttpStatus.CREATED).body(player);
     }
-    @GetMapping(path = "draw_cards/{player_id}/{deck_id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<PlayerDTO> drawCards(@PathVariable Long playerId, @PathVariable String deckId){
-        PlayerDTO player = playerService.drawCards(playerId, deckId);
-        return ResponseEntity.status(HttpStatus.OK).body(player);
-    }
-
 
 
 }
