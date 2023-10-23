@@ -8,8 +8,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication
 public class DesafioCartasApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(DesafioCartasApplication.class, args);
-	}
-
+  public static void main(String[] args) {
+    SpringApplication.run(DesafioCartasApplication.class, args);
+  }
 }

@@ -12,41 +12,36 @@ import lombok.Setter;
 @Table(name = "card")
 @Getter
 @Setter
-public class CardEntity extends AbstractBaseEntity{
+public class CardEntity extends AbstractBaseEntity {
 
-    private Integer rank;
+  private Integer rank;
 
-    private String code;
+  private String code;
 
-    private String suit;
+  private String suit;
 
-    @ManyToOne
-    @JoinColumn(name = "player_id")
-    private PlayerEntity player;
+  @ManyToOne
+  @JoinColumn(name = "player_id")
+  private PlayerEntity player;
 
-    public CardDTO toDTO() {
-        String rank;
-        switch (this.rank) {
-            case 13:
-                rank = "KING";
-                break;
-            case 12:
-                rank = "QUEEN";
-                break;
-            case 11:
-                rank = "JACK";
-                break;
-            case 1:
-                rank = "ACE";
-                break;
-            default:
-                rank = String.valueOf(this.rank);
-        }
-        return new CardDTO(
-                this.getId(),
-                this.getCode(),
-                rank,
-                this.getSuit()
-        );
+  public CardDTO toDTO() {
+    String rank;
+    switch (this.rank) {
+      case 13:
+        rank = "KING";
+        break;
+      case 12:
+        rank = "QUEEN";
+        break;
+      case 11:
+        rank = "JACK";
+        break;
+      case 1:
+        rank = "ACE";
+        break;
+      default:
+        rank = String.valueOf(this.rank);
     }
+    return new CardDTO(this.getId(), this.getCode(), rank, this.getSuit());
+  }
 }

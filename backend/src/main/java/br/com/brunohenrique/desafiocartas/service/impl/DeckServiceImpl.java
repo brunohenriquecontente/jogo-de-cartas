@@ -11,16 +11,14 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Transactional
-public class DeckServiceImpl extends AbstractBaseRepositoryImpl<DeckEntity, Long> implements DeckService {
+public class DeckServiceImpl extends AbstractBaseRepositoryImpl<DeckEntity, Long>
+    implements DeckService {
 
-    @Autowired
-    private DeckRepository deckRepository;
+  @Autowired private DeckRepository deckRepository;
 
-    @Autowired
-    private ClientFeignDeck clientFeignDeck;
+  @Autowired private ClientFeignDeck clientFeignDeck;
 
-    public DeckServiceImpl(DeckRepository deckRepository) {
-        super(deckRepository);
-    }
-
-   }
+  public DeckServiceImpl(DeckRepository deckRepository) {
+    super(deckRepository);
+  }
+}
