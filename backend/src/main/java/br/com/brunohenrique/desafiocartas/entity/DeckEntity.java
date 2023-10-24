@@ -5,13 +5,17 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.io.Serial;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
 @Table(name = "deck")
+@AllArgsConstructor
+@NoArgsConstructor
 public class DeckEntity extends AbstractBaseEntity {
 
   @Serial private static final long serialVersionUID = 1709184783624324800L;

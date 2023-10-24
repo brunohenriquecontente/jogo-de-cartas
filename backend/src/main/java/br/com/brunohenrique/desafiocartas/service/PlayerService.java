@@ -8,4 +8,6 @@ public interface PlayerService {
   public PlayerDTO getById(Long playerId);
 
   public void deleteById(Long playerId);
+
+  public PlayerDTO updateById(Long playerId, PlayerDTO playerDTO);
 }
