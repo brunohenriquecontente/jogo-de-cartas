@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
 public interface CardRepository
     extends AbstractBaseRepository<CardEntity, Long>, JpaSpecificationExecutor<CardEntity> {
 
-  public List<CardEntity> deleteAllByPlayerId(Long playerId);
+  public void deleteAllByPlayerId(Long playerId);
 }

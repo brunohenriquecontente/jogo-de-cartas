@@ -9,22 +9,28 @@ import jakarta.persistence.Table;
 import java.io.Serial;
 import java.util.List;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
 @Table(name = "match")
+@NoArgsConstructor
 public class MatchEntity extends AbstractBaseEntity {
 
   @Serial private static final long serialVersionUID = -3678957801372784015L;
 
-  String winner;
+  private String winner;
 
   @OneToOne private DeckEntity deck;
 
   @OneToMany(mappedBy = "match")
   private List<PlayerEntity> players;
+
+  public MatchEntity(DeckEntity deck) {
+    this.deck = deck;
+  }
 
   public MatchDTO toDTO() {
     List<PlayerDTO> playerDTOs = this.getPlayers().stream().map(PlayerEntity::toDTO).toList();
