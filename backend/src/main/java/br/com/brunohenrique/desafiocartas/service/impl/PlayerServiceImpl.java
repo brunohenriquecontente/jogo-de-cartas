@@ -14,34 +14,31 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Transactional
-public class PlayerServiceImpl extends AbstractBaseRepositoryImpl<PlayerEntity, Long>
-    implements PlayerService {
+public class PlayerServiceImpl implements PlayerService {
 
-  @Autowired private PlayerRepository playerRepository;
+    private final PlayerRepository playerRepository;
 
-  @Autowired private CardRepository cardRepository;
 
-  @Autowired private ClientFeignDeck clientFeignDeck;
+    public PlayerServiceImpl(PlayerRepository playerRepository) {
+        this.playerRepository = playerRepository;
 
-  public PlayerServiceImpl(PlayerRepository playerRepository) {
-    super(playerRepository);
-  }
+    }
 
-  public PlayerDTO insert(PlayerDTO playerDTO) {
-    PlayerEntity playerEntity = new PlayerEntity();
-    BeanUtils.copyProperties(playerDTO, playerEntity);
-    playerEntity.setCards(null);
-    playerEntity.setMatch(null);
-    playerEntity = playerRepository.save(playerEntity);
-    return new PlayerDTO(playerEntity.getId(), playerEntity.getName(), null, null);
-  }
+    public PlayerDTO insert(PlayerDTO playerDTO) {
+        PlayerEntity playerEntity = new PlayerEntity();
+        BeanUtils.copyProperties(playerDTO, playerEntity);
+        playerEntity.setCards(null);
+        playerEntity.setMatch(null);
+        playerEntity = playerRepository.save(playerEntity);
+        return new PlayerDTO(playerEntity.getId(), playerEntity.getName(), null, null);
+    }
 
-  public PlayerDTO getById(Long playerId) {
-    PlayerEntity playerEntity = playerRepository.findById(playerId).get();
-    return playerEntity.toDTO();
-  }
+    public PlayerDTO getById(Long playerId) {
+        PlayerEntity playerEntity = playerRepository.findById(playerId).get();
+        return playerEntity.toDTO();
+    }
 
-  public void deleteById(Long playerId) {
-    playerRepository.deleteById(playerId);
-  }
+    public void deleteById(Long playerId) {
+        playerRepository.deleteById(playerId);
+    }
 }
