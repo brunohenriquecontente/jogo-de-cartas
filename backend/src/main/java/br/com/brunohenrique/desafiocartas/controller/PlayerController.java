@@ -2,35 +2,42 @@ package br.com.brunohenrique.desafiocartas.controller;
 
 import br.com.brunohenrique.desafiocartas.dto.PlayerDTO;
 import br.com.brunohenrique.desafiocartas.service.PlayerService;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "player")
+@RequestMapping(value = "/player")
 public class PlayerController {
 
-  @Autowired private PlayerService playerService;
+  private final PlayerService playerService;
 
-  @PostMapping(
-      consumes = MediaType.APPLICATION_JSON_VALUE,
-      produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<PlayerDTO> create(@RequestBody PlayerDTO player) {
-    player = playerService.insert(player);
-    return ResponseEntity.status(HttpStatus.CREATED).body(player);
+  public PlayerController(PlayerService playerService) {
+    this.playerService = playerService;
+  }
+
+  @PostMapping
+  @ResponseStatus(HttpStatus.CREATED)
+  public PlayerDTO create(@Valid @RequestBody PlayerDTO player) {
+    return playerService.insert(player);
   }
 
   @GetMapping(value = "{playerId}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<PlayerDTO> get(@PathVariable Long playerId) {
-    PlayerDTO player = playerService.getById(playerId);
-    return ResponseEntity.status(HttpStatus.OK).body(player);
+  @ResponseStatus(HttpStatus.OK)
+  public PlayerDTO get(@PathVariable Long playerId) {
+    return playerService.getById(playerId);
   }
 
   @DeleteMapping(value = "{playerId}")
-  public ResponseEntity<String> delete(@PathVariable Long playerId) {
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void delete(@PathVariable Long playerId) {
     playerService.deleteById(playerId);
-    return ResponseEntity.status(HttpStatus.OK).build();
+  }
+
+  @PutMapping(value = "{playerId}")
+  @ResponseStatus(HttpStatus.ACCEPTED)
+  public PlayerDTO update(@PathVariable Long playerId, @Valid @RequestBody PlayerDTO playerDTO) {
+    return playerService.updateById(playerId, playerDTO);
   }
 }

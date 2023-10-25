@@ -1,4 +1,4 @@
-package br.com.brunohenrique.desafiocartas.service;
+package br.com.brunohenrique.desafiocartas.clients;
 
 import br.com.brunohenrique.desafiocartas.dto.DeckDTO;
 import br.com.brunohenrique.desafiocartas.dto.DrawResponseDTO;
@@ -12,6 +12,6 @@ public interface ClientFeignDeck {
   @GetMapping("new/shuffle/?deck_count=1")
   DeckDTO getNewDeck();
 
-  @GetMapping("{deck_id}/draw/?count={count}")
-  DrawResponseDTO getCards(@PathVariable String deck_id, @PathVariable Integer count);
+  @GetMapping("{deckId}/draw/?count={count}")
+  DrawResponseDTO getCards(@PathVariable String deckId, @PathVariable Integer count);
 }
