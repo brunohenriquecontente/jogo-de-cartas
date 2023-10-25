@@ -2,6 +2,7 @@ package br.com.brunohenrique.desafiocartas.service.impl;
 
 import br.com.brunohenrique.desafiocartas.dto.PlayerDTO;
 import br.com.brunohenrique.desafiocartas.entity.PlayerEntity;
+import br.com.brunohenrique.desafiocartas.exceptions.BadRequestException;
 import br.com.brunohenrique.desafiocartas.repository.PlayerRepository;
 import br.com.brunohenrique.desafiocartas.service.PlayerService;
 import jakarta.transaction.Transactional;
@@ -28,7 +29,10 @@ public class PlayerServiceImpl implements PlayerService {
   }
 
   public PlayerDTO getById(Long playerId) {
-    PlayerEntity playerEntity = playerRepository.findById(playerId).get();
+    PlayerEntity playerEntity =
+        playerRepository
+            .findById(playerId)
+            .orElseThrow(() -> BadRequestException.notFoundException("Player not found."));
     return playerEntity.toDTO();
   }
 
@@ -39,7 +43,10 @@ public class PlayerServiceImpl implements PlayerService {
   public PlayerDTO updateById(Long playerId, PlayerDTO playerDTO) {
     PlayerDTO playerDTOResponse = null;
     if (playerRepository.existsById(playerId)) {
-      PlayerEntity playerEntity = playerRepository.findById(playerId).get();
+      PlayerEntity playerEntity =
+          playerRepository
+              .findById(playerId)
+              .orElseThrow(() -> BadRequestException.notFoundException("Player not found."));
       playerEntity.setName(playerDTO.name());
       playerEntity.setCards(null);
       playerEntity.setMatch(null);

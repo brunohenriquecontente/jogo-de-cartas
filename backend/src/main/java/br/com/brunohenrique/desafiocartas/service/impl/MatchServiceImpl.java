@@ -1,12 +1,13 @@
 package br.com.brunohenrique.desafiocartas.service.impl;
 
+import br.com.brunohenrique.desafiocartas.clients.ClientFeignDeck;
 import br.com.brunohenrique.desafiocartas.dto.*;
 import br.com.brunohenrique.desafiocartas.entity.CardEntity;
 import br.com.brunohenrique.desafiocartas.entity.DeckEntity;
 import br.com.brunohenrique.desafiocartas.entity.MatchEntity;
 import br.com.brunohenrique.desafiocartas.entity.PlayerEntity;
+import br.com.brunohenrique.desafiocartas.exceptions.BadRequestException;
 import br.com.brunohenrique.desafiocartas.repository.*;
-import br.com.brunohenrique.desafiocartas.service.ClientFeignDeck;
 import br.com.brunohenrique.desafiocartas.service.MatchService;
 import jakarta.transaction.Transactional;
 import java.util.*;
@@ -55,7 +56,10 @@ public class MatchServiceImpl implements MatchService {
     MatchEntity finalMatchEntity = matchEntity;
     players.forEach(
         playerDTO -> {
-          PlayerEntity playerEntity = playerRepository.findById(playerDTO.id()).get();
+          PlayerEntity playerEntity =
+              playerRepository
+                  .findById(playerDTO.id())
+                  .orElseThrow(() -> BadRequestException.notFoundException("Player not found."));
           // remove cartas do jogador, caso ele tenha jogado uma partida anteriormente
           cardRepository.deleteAllByPlayerId(playerEntity.getId());
           playerEntity.setMatch(finalMatchEntity);
@@ -94,40 +98,34 @@ public class MatchServiceImpl implements MatchService {
   @Override
   public MatchDTO getWinner(Long matchId) {
     List<PlayerEntity> playerEntityList = playerRepository.findAllByMatchId(matchId);
-    StringBuilder winnerPlayer = new StringBuilder();
-    int maxSum = Integer.MIN_VALUE;
-    boolean isTie = false;
-
-    winnerPlayer = checkWinnerPlayer(playerEntityList, winnerPlayer, maxSum, isTie);
-
-    MatchEntity matchEntity = matchRepository.findById(matchId).get();
-    matchEntity.setWinner(winnerPlayer.toString());
+    final String winnerPlayer = checkWinnerPlayer(playerEntityList);
+    MatchEntity matchEntity =
+        matchRepository
+            .findById(matchId)
+            .orElseThrow(() -> BadRequestException.notFoundException("Match not found."));
+    matchEntity.setWinner(winnerPlayer);
     matchRepository.save(matchEntity);
     DeckDTO deckDTO = new DeckDTO(matchEntity.getDeck().getDeckId());
 
-    MatchDTO matchDTO = new MatchDTO(matchEntity.getId(), matchEntity.getWinner(), deckDTO, null);
-
-    return matchDTO;
+    return new MatchDTO(matchEntity.getId(), matchEntity.getWinner(), deckDTO, null);
   }
 
-  private static StringBuilder checkWinnerPlayer(
-      List<PlayerEntity> playerEntityList, StringBuilder winnerPlayer, int maxSum, boolean isTie) {
+  private static String checkWinnerPlayer(List<PlayerEntity> playerEntityList) {
+    List<String> winners = new ArrayList<>();
+    int maxSum = 0;
+
     for (PlayerEntity player : playerEntityList) {
       int sum = player.getCards().stream().mapToInt(CardEntity::getRank).sum();
 
       if (sum > maxSum) {
         maxSum = sum;
-        winnerPlayer = new StringBuilder(player.getName());
-        isTie = false;
+        winners.clear();
+        winners.add(player.getName());
       } else if (sum == maxSum) {
-        if (!isTie) {
-          winnerPlayer.append(", ").append(player.getName());
-          isTie = true;
-        } else {
-          winnerPlayer.append(", ").append(player.getName());
-        }
+        winners.add(player.getName());
       }
     }
-    return winnerPlayer;
+
+    return String.join(", ", winners);
   }
 }
