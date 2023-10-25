@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
+import br.com.brunohenrique.desafiocartas.clients.ClientFeignDeck;
 import br.com.brunohenrique.desafiocartas.dto.*;
 import br.com.brunohenrique.desafiocartas.entity.CardEntity;
 import br.com.brunohenrique.desafiocartas.entity.DeckEntity;
@@ -15,7 +16,6 @@ import br.com.brunohenrique.desafiocartas.repository.CardRepository;
 import br.com.brunohenrique.desafiocartas.repository.DeckRepository;
 import br.com.brunohenrique.desafiocartas.repository.MatchRepository;
 import br.com.brunohenrique.desafiocartas.repository.PlayerRepository;
-import br.com.brunohenrique.desafiocartas.service.ClientFeignDeck;
 import br.com.brunohenrique.desafiocartas.utils.CardDTOBuilder;
 import java.util.*;
 import org.junit.jupiter.api.Test;
