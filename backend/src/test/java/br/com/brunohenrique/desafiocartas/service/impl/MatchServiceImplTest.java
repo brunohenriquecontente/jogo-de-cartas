@@ -1,13 +1,10 @@
 package br.com.brunohenrique.desafiocartas.service.impl;
 
-import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
-
 import br.com.brunohenrique.desafiocartas.clients.ClientFeignDeck;
-import br.com.brunohenrique.desafiocartas.dto.*;
+import br.com.brunohenrique.desafiocartas.dto.DeckDTO;
+import br.com.brunohenrique.desafiocartas.dto.DrawResponseDTO;
+import br.com.brunohenrique.desafiocartas.dto.MatchDTO;
+import br.com.brunohenrique.desafiocartas.dto.PlayerDTO;
 import br.com.brunohenrique.desafiocartas.entity.CardEntity;
 import br.com.brunohenrique.desafiocartas.entity.DeckEntity;
 import br.com.brunohenrique.desafiocartas.entity.MatchEntity;
@@ -17,7 +14,6 @@ import br.com.brunohenrique.desafiocartas.repository.DeckRepository;
 import br.com.brunohenrique.desafiocartas.repository.MatchRepository;
 import br.com.brunohenrique.desafiocartas.repository.PlayerRepository;
 import br.com.brunohenrique.desafiocartas.utils.CardDTOBuilder;
-import java.util.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -25,6 +21,16 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class MatchServiceImplTest {

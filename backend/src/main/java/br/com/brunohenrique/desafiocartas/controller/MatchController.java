@@ -4,10 +4,11 @@ import br.com.brunohenrique.desafiocartas.dto.MatchDTO;
 import br.com.brunohenrique.desafiocartas.dto.PlayerDTO;
 import br.com.brunohenrique.desafiocartas.service.MatchService;
 import jakarta.validation.Valid;
-import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "match")

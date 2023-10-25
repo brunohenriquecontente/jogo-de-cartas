@@ -7,12 +7,19 @@ import br.com.brunohenrique.desafiocartas.entity.DeckEntity;
 import br.com.brunohenrique.desafiocartas.entity.MatchEntity;
 import br.com.brunohenrique.desafiocartas.entity.PlayerEntity;
 import br.com.brunohenrique.desafiocartas.exceptions.BadRequestException;
-import br.com.brunohenrique.desafiocartas.repository.*;
+import br.com.brunohenrique.desafiocartas.repository.CardRepository;
+import br.com.brunohenrique.desafiocartas.repository.DeckRepository;
+import br.com.brunohenrique.desafiocartas.repository.MatchRepository;
+import br.com.brunohenrique.desafiocartas.repository.PlayerRepository;
 import br.com.brunohenrique.desafiocartas.service.MatchService;
 import jakarta.transaction.Transactional;
-import java.util.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional

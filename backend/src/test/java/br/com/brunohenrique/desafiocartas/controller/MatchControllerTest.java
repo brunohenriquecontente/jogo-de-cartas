@@ -1,13 +1,10 @@
 package br.com.brunohenrique.desafiocartas.controller;
 
-import static org.mockito.BDDMockito.given;
-
 import br.com.brunohenrique.desafiocartas.dto.DeckDTO;
 import br.com.brunohenrique.desafiocartas.dto.MatchDTO;
 import br.com.brunohenrique.desafiocartas.dto.PlayerDTO;
 import br.com.brunohenrique.desafiocartas.service.MatchService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -16,6 +13,10 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+import java.util.List;
+
+import static org.mockito.BDDMockito.given;
 
 @WebMvcTest(MatchController.class)
 class MatchControllerTest {
@@ -27,7 +28,7 @@ class MatchControllerTest {
   @Autowired private ObjectMapper objectMapper;
 
   @Test
-  void shouldInsertMatch() throws Exception{
+  void shouldInsertMatch() throws Exception {
     List<PlayerDTO> players =
         List.of(new PlayerDTO(1L, "Player1", null, null), new PlayerDTO(2L, "Player2", null, null));
 

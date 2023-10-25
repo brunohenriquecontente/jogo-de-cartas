@@ -3,6 +3,7 @@ package br.com.brunohenrique.desafiocartas.utils;
 import br.com.brunohenrique.desafiocartas.dto.DeckDTO;
 import br.com.brunohenrique.desafiocartas.dto.MatchDTO;
 import br.com.brunohenrique.desafiocartas.dto.PlayerDTO;
+
 import java.util.List;
 
 public final class MatchDTOBuilder {
