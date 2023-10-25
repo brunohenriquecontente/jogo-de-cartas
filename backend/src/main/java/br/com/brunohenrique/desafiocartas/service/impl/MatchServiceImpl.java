@@ -105,6 +105,9 @@ public class MatchServiceImpl implements MatchService {
   @Override
   public MatchDTO getWinner(Long matchId) {
     List<PlayerEntity> playerEntityList = playerRepository.findAllByMatchId(matchId);
+    if(playerEntityList.isEmpty()){
+      throw BadRequestException.notFoundException("Players not founds for this match");
+    }
     final String winnerPlayer = checkWinnerPlayer(playerEntityList);
     MatchEntity matchEntity =
         matchRepository

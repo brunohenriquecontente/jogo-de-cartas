@@ -52,6 +52,8 @@ public class PlayerServiceImpl implements PlayerService {
       playerEntity.setMatch(null);
       playerDTOResponse = new PlayerDTO(playerEntity.getId(), playerEntity.getName(), null, null);
       playerRepository.save(playerEntity);
+    }else{
+      throw BadRequestException.notFoundException("Player not found.");
     }
     return playerDTOResponse;
   }
