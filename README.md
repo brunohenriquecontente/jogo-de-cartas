@@ -1,8 +1,9 @@
-# Desafio Cartas
+# Jogo de Cartas
 
 ## Descrição
 
-O Desafio Cartas consiste em criar jogadores e iniciar uma partida usando o baralho presente na API deckofcardsapi.com/api. Em seguida, verificar o jogador que tem a maior somatória do valor das cartas e mostrar o vencedor.
+O Desafio Cartas consiste em criar jogadores e iniciar uma partida usando o baralho presente na API deckofcardsapi.com/api.
+Ai iniciar uma partida, são distribuídas 5 cartas para cada jogador, em seguida, é possível verificar o jogador que tem a maior somatória do valor das cartas e mostrar o vencedor.
 
 ## Endpoints
 
