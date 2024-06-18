@@ -5,6 +5,7 @@ import br.com.brunohenrique.desafiocartas.service.PlayerService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,7 +21,7 @@ public class PlayerController {
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public PlayerDTO create(@Valid @RequestBody PlayerDTO player) {
-    return playerService.insert(player);
+     return playerService.insert(player);
   }
 
   @GetMapping(value = "{playerId}", produces = MediaType.APPLICATION_JSON_VALUE)
