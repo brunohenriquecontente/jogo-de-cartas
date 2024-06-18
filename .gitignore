@@ -30,3 +30,6 @@ buildNumber.properties
 .idea/desafiocartas.iml
 .idea/modules.xml
 .idea/vcs.xml
+
+###MAC Os Files###
+.DS_Store
