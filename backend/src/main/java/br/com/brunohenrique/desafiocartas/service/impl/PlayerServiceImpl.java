@@ -25,10 +25,12 @@ public class PlayerServiceImpl implements PlayerService {
     playerEntity.setCards(null);
     playerEntity.setMatch(null);
     playerEntity = playerRepository.save(playerEntity);
+
     return new PlayerDTO(playerEntity.getId(), playerEntity.getName(), null, null);
   }
 
   public PlayerDTO getById(Long playerId) {
+
     PlayerEntity playerEntity =
         playerRepository
             .findById(playerId)
@@ -52,7 +54,7 @@ public class PlayerServiceImpl implements PlayerService {
       playerEntity.setMatch(null);
       playerDTOResponse = new PlayerDTO(playerEntity.getId(), playerEntity.getName(), null, null);
       playerRepository.save(playerEntity);
-    }else{
+    } else {
       throw BadRequestException.notFoundException("Player not found.");
     }
     return playerDTOResponse;

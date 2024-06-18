@@ -2,7 +2,6 @@ package br.com.brunohenrique.desafiocartas.service;
 
 import br.com.brunohenrique.desafiocartas.dto.MatchDTO;
 import br.com.brunohenrique.desafiocartas.dto.PlayerDTO;
-
 import java.util.List;
 
 public interface MatchService {

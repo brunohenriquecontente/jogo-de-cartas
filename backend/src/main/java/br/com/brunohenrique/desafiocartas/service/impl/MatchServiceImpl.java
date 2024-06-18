@@ -13,13 +13,12 @@ import br.com.brunohenrique.desafiocartas.repository.MatchRepository;
 import br.com.brunohenrique.desafiocartas.repository.PlayerRepository;
 import br.com.brunohenrique.desafiocartas.service.MatchService;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.BeanUtils;
-import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Service;
 
 @Service
 @Transactional
@@ -105,7 +104,7 @@ public class MatchServiceImpl implements MatchService {
   @Override
   public MatchDTO getWinner(Long matchId) {
     List<PlayerEntity> playerEntityList = playerRepository.findAllByMatchId(matchId);
-    if(playerEntityList.isEmpty()){
+    if (playerEntityList.isEmpty()) {
       throw BadRequestException.notFoundException("Players not founds for this match");
     }
     final String winnerPlayer = checkWinnerPlayer(playerEntityList);
